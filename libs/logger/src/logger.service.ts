@@ -7,10 +7,12 @@ import { LogLevel } from './enum';
 export class LoggerService implements Logger {
   private logger: winston.Logger;
 
+  private _checkIncomingValueType(logLevel: any): boolean {
+    return typeof(logLevel) == 'object' ? true : false
+  }
   constructor(@Inject('LOG_LEVEL') private readonly _logLevel) {
-    const isTypeObject = typeof this._logLevel == 'object' ? true : false;
-    if (isTypeObject) {
-      this._logLevel = this._logLevel.logLevel;
+    if(this._checkIncomingValueType(this._logLevel)) {
+      this._logLevel = this._logLevel.logLevel
     }
     this.logger = winston.createLogger({
       format: winston.format.combine(
