@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Logger } from './interface';
 import * as winston from 'winston';
 import { LogLevel } from './enum';
-import { type } from 'os';
 
 @Injectable()
 export class LoggerService implements Logger {
