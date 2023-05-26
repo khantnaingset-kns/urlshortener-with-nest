@@ -1,5 +1,6 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+import { ApiUserModule } from './module/api-user/api-user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoggerModule } from '@app/logger';
@@ -18,6 +19,7 @@ import { config } from './config';
     ConfigModule.forRoot({
       load: [config],
     }),
+    ApiUserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

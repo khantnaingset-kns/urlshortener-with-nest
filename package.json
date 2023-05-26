@@ -29,6 +29,7 @@
     "@nestjs/mongoose": "^9.2.2",
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/platform-fastify": "^9.4.2",
+    "@nestjs/swagger": "^6.3.0",
     "@nestjs/throttler": "^4.0.0",
     "argon2": "^0.30.3",
     "cache-manager": "^5.2.1",
@@ -36,6 +37,7 @@
     "class-validator": "^0.14.0",
     "moment": "^2.29.4",
     "mongoose": "^7.2.0",
+    "mongoose-async": "^1.0.1",
     "nanoid": "^4.0.2",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
@@ -43,6 +45,7 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.0.1",
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
     "@nestjs/testing": "^9.0.0",
