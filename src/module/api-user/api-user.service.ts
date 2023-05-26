@@ -10,10 +10,12 @@ import {
   FilterByRoleQuery,
 } from './interface';
 import { APIUserDocument } from './schema/api-user.schema';
+import { LoggerService } from '@app/logger';
 @Injectable()
 export class APIUserService {
   constructor(
     @InjectModel(APIUser.name) private readonly _apiUserModel: Model<APIUser>,
+    private readonly _loggerService: LoggerService,
   ) {}
 
   async create(createAPIUserDTO: CreateAPIUserDTO): Promise<APIUserDocument> {

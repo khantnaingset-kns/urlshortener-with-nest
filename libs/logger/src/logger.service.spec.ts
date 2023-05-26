@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { LogLevel } from './enum';
+import { LogLevel } from './enums';
 import { LoggerService } from './logger.service';
 
 describe('LoggerService', () => {

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Logger } from './interface';
+import { Logger } from './interfaces';
 import * as winston from 'winston';
-import { LogLevel } from './enum';
+import { LogLevel } from './enums';
 
 @Injectable()
 export class LoggerService implements Logger {
@@ -23,11 +23,12 @@ export class LoggerService implements Logger {
       transports: [new winston.transports.Console()],
     });
   }
-
+  log(log: string): void {
+    this.logger.info(log);
+  }
   getLogLevel(): LogLevel {
     return this._logLevel;
   }
-
   verbose(log: string): void {
     this.logger.verbose(log);
   }

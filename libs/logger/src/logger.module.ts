@@ -1,21 +1,24 @@
-import { AppLogLevel, LoggerAsyncRegisterOptions } from './interface';
 import {
   DynamicModule,
+  Global,
   MiddlewareConsumer,
   Module,
   NestModule,
 } from '@nestjs/common';
+import { LoggerModuleAsyncOption, LoggerModuleOption } from './interfaces';
 
+import { ConfigurableModuleClass } from './logger.module-definition';
 import { LoggerMiddleware } from './logger.middleware';
 import { LoggerService } from './logger.service';
 
+@Global()
 @Module({})
 export class LoggerModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(LoggerMiddleware).forRoutes('*');
   }
 
-  static registerForRoot({ logLevel }: AppLogLevel): DynamicModule {
+  static registerForRoot({ logLevel }: LoggerModuleOption): DynamicModule {
     return {
       module: LoggerModule,
       providers: [
@@ -29,9 +32,7 @@ export class LoggerModule implements NestModule {
     };
   }
 
-  static registerForRootAsync(
-    options: LoggerAsyncRegisterOptions,
-  ): DynamicModule {
+  static registerForRootAsync(options: LoggerModuleAsyncOption): DynamicModule {
     return {
       imports: options.imports,
       module: LoggerModule,
