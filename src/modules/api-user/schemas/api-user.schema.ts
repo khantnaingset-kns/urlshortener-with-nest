@@ -3,7 +3,7 @@ import * as argon2 from 'argon2';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import { HydratedDocument } from 'mongoose';
-import { Role } from '../enum';
+import { Role } from '../enums';
 
 export type APIUserDocument = HydratedDocument<APIUser>;
 

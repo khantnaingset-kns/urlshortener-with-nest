@@ -2,7 +2,7 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/swagger';
-import { Role } from '../enum';
+import { Role } from '../enums';
 
 export class CreateAPIUserDTO {
   @ApiProperty()
@@ -28,9 +28,18 @@ export class CreateAPIUserDTO {
 
 export class UpdateAPIUserDTO extends PartialType(CreateAPIUserDTO) {}
 
-export class DeleteAPIUserDTO {
+export class APIUserResponse extends PartialType(CreateAPIUserDTO) {
   @ApiProperty()
-  @IsNotEmpty()
-  @IsString()
-  userID: string;
+  _id: string;
+
+  @ApiProperty()
+  createdAt: string;
+
+  @ApiProperty()
+  updatedAt: string;
+}
+
+export class DeleteRouteSuccessResponse {
+  @ApiProperty()
+  message: string;
 }

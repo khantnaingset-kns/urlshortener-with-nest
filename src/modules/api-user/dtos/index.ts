@@ -1,5 +1,6 @@
 export {
   CreateAPIUserDTO,
-  DeleteAPIUserDTO,
+  APIUserResponse,
   UpdateAPIUserDTO,
+  DeleteRouteSuccessResponse,
 } from './api-user.dto';

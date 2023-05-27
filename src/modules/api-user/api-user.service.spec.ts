@@ -1,15 +1,16 @@
 import * as argon2 from 'argon2';
 
-import { APIUser, APIUserSchema } from './schema';
+import { APIUser, APIUserSchema } from './schemas';
 import { Connection, Model, connect } from 'mongoose';
+import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dtos/api-user.dto';
+import { LoggerModule, LoggerService } from '@app/logger';
 import { Test, TestingModule } from '@nestjs/testing';
 
+import { APIUserDocument } from './schemas/api-user.schema';
 import { APIUserService } from './api-user.service';
-import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dto/api-user.dto';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { faker } from '@faker-js/faker';
 import { getModelToken } from '@nestjs/mongoose';
-import { APIUserDocument } from './schema/api-user.schema';
 
 describe('APIUserService', () => {
   let service: APIUserService;
@@ -24,6 +25,7 @@ describe('APIUserService', () => {
 
     apiUserModel = mongoConnection.model(APIUser.name, APIUserSchema);
     const module: TestingModule = await Test.createTestingModule({
+      imports: [LoggerModule.registerForRoot({ logLevel: 'verbose' })],
       providers: [
         APIUserService,
         {
@@ -132,6 +134,12 @@ describe('APIUserService', () => {
       expect(apiUsers_Q2.length).toEqual(5);
       const apiUsers_Q3 = await service.findAll({ skip: 0, take: 10 });
       expect(apiUsers_Q3.length).toEqual(10);
+    });
+
+    it('should return the APIUsers that match with email', async () => {
+      const apiUser = await service.findByEmail('fts_email1@fakermail.com');
+      expect(apiUser).toBeDefined();
+      expect(apiUser.email).toEqual('fts_email1@fakermail.com');
     });
 
     it('should match partial text search query', async () => {

@@ -9,8 +9,13 @@ import {
   Delete,
 } from '@nestjs/common';
 import { APIUserService } from './api-user.service';
-import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dto/api-user.dto';
-import { APIUser, APIUserDocument } from './schema/api-user.schema';
+import {
+  CreateAPIUserDTO,
+  APIUserResponse,
+  UpdateAPIUserDTO,
+  DeleteRouteSuccessResponse,
+} from './dtos/';
+import { APIUserDocument } from './schemas/api-user.schema';
 import {
   ApiTags,
   ApiOperation,
@@ -25,7 +30,7 @@ import {
   FilterByRoleQuery,
   Pagination,
   PartialTextSearchQuery,
-} from './interface';
+} from './interfaces';
 
 @ApiTags('API Users')
 @Controller('api-users')
@@ -37,7 +42,7 @@ export class APIUserController {
   @ApiResponse({
     status: 201,
     description: 'The created API user',
-    type: APIUser,
+    type: APIUserResponse,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({
@@ -56,7 +61,7 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'List of API users',
-    type: APIUser,
+    type: APIUserResponse,
     isArray: true,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
@@ -73,7 +78,7 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'List of matching API Users',
-    type: APIUser,
+    type: APIUserResponse,
     isArray: true,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
@@ -92,7 +97,7 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'List of filtered API users',
-    type: APIUser,
+    type: APIUserResponse,
     isArray: true,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
@@ -109,7 +114,7 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'The found API User',
-    type: APIUser,
+    type: APIUserResponse,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
@@ -124,7 +129,7 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'The updated API User',
-    type: APIUser,
+    type: APIUserResponse,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
@@ -141,12 +146,15 @@ export class APIUserController {
   @ApiResponse({
     status: 200,
     description: 'The deleted API User',
-    type: APIUser,
+    type: DeleteRouteSuccessResponse,
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @Delete(':id')
-  async deleteById(@Param('id') apiUserID: string): Promise<APIUserDocument> {
-    return this.apiUserService.deleteById(apiUserID);
+  async deleteById(@Param('id') apiUserID: string): Promise<any> {
+    await this.apiUserService.deleteById(apiUserID);
+    return {
+      message: `API User with ID ${apiUserID} deleted successfully`,
+    };
   }
 }

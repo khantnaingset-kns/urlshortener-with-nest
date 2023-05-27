@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { APIUser } from './schema';
+import { APIUser } from './schemas';
 import { Model } from 'mongoose';
-import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dto/api-user.dto';
+import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dtos/api-user.dto';
 import * as argon2 from 'argon2';
 import {
   Pagination,
   PartialTextSearchQuery,
   FilterByRoleQuery,
-} from './interface';
-import { APIUserDocument } from './schema/api-user.schema';
+} from './interfaces';
+import { APIUserDocument } from './schemas/api-user.schema';
 import { LoggerService } from '@app/logger';
 @Injectable()
 export class APIUserService {
@@ -28,8 +28,17 @@ export class APIUserService {
     return createdAPIUser.save();
   }
 
+  async findByEmail(email: string): Promise<APIUserDocument> {
+    return this._apiUserModel.findOne({ email }).select('-__v').exec();
+  }
+
   async findAll({ skip, take }: Pagination): Promise<APIUserDocument[]> {
-    return this._apiUserModel.find().skip(skip).limit(take).exec();
+    return this._apiUserModel
+      .find()
+      .skip(skip)
+      .limit(take)
+      .select('-__v')
+      .exec();
   }
 
   async findByText({
@@ -42,6 +51,7 @@ export class APIUserService {
       })
       .skip(pagination.skip)
       .limit(pagination.take)
+      .select('-__v')
       .exec();
   }
 
@@ -53,10 +63,11 @@ export class APIUserService {
       .find({ role: role })
       .skip(pagination.skip)
       .limit(pagination.take)
+      .select('-__v')
       .exec();
   }
   async findById(apiUserID: string): Promise<APIUserDocument> {
-    return this._apiUserModel.findById(apiUserID).exec();
+    return this._apiUserModel.findById(apiUserID).select('-__v').exec();
   }
 
   async update(
@@ -65,6 +76,7 @@ export class APIUserService {
   ): Promise<APIUserDocument> {
     return this._apiUserModel
       .findByIdAndUpdate(apiUserID, createAPIUserDTO, { new: true })
+      .select('-__v')
       .exec();
   }
 

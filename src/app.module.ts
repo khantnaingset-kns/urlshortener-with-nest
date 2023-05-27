@@ -1,10 +1,10 @@
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { LoggerModule, LoggerService } from '@app/logger';
 
-import { ApiUserModule } from './module/api-user/api-user.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ComposerModule } from './module/module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ComposerModule } from './modules/';
+import { LoggerModule } from '@app/logger';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { config } from './config';
@@ -29,7 +29,8 @@ import { getMongoURI } from './app.utils';
     ConfigModule.forRoot({
       load: [config],
     }),
-    ApiUserModule,
+    ComposerModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

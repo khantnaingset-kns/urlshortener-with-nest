@@ -1,4 +1,4 @@
-import { APIUser, APIUserSchema } from './schema';
+import { APIUser, APIUserSchema } from './schemas';
 import { LoggerModule, LoggerService } from '@app/logger';
 
 import { APIUserController } from './api-user.controller';
@@ -26,5 +26,6 @@ import { MongooseModule } from '@nestjs/mongoose';
   ],
   controllers: [APIUserController],
   providers: [APIUserService],
+  exports: [APIUserService],
 })
 export class ApiUserModule {}
