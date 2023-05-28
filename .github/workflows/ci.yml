@@ -1,4 +1,4 @@
-name: Continus Intergaton - Build Docker image and push to Cloud
+name: CI - Test, Scan, Build and Publish Docker image and push to Cloud
 
 on:
   push:

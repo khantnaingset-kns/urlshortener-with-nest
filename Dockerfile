@@ -2,7 +2,7 @@
 FROM node:latest AS build-env
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
-RUN npm ci --only=production
+RUN npm ci --omit=dev
 RUN npm run build
 
 # 1. Build the app using minimal alpine env

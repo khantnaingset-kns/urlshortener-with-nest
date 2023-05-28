@@ -1,0 +1,12 @@
+name: Deploy to AWS Lambda
+
+on:
+  push:
+    branches:
+      - release/lambda
+
+jobs:
+  deploy:
+    name: Deploy docker image to a Lambda function
+    
+    
