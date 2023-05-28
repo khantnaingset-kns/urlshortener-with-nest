@@ -2,8 +2,8 @@
 FROM node:latest AS build-env
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
-RUN npm install -g pnpm
-RUN pnpm install -P
+RUN npm i -g pnpm
+RUN pnpm i
 RUN pnpm build
 
 # 1. Build the app using minimal alpine env
