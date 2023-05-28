@@ -2,9 +2,8 @@
 FROM node:latest AS build-env
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
-RUN npm install -g pnpm
-RUN pnpm install -P --no-frozen-lockfile
-RUN pnpm build
+RUN npm ci --only=production
+RUN npm run build
 
 # 1. Build the app using minimal alpine env
 FROM node:lts-alpine
