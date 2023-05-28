@@ -1,5 +1,3 @@
-import * as argon2 from 'argon2';
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import { HydratedDocument } from 'mongoose';
@@ -21,7 +19,7 @@ export class APIUser {
   })
   password: string;
 
-  @Prop({ type: String, enum: Roles, default: Roles.User })
+  @Prop({ type: String, enum: Roles, default: Roles.URLCreator })
   role: Roles;
 }
 

@@ -1,20 +1,19 @@
 import * as argon2 from 'argon2';
 
-import { APIUser, APIUserSchema } from './schemas';
+import { APIUser, APIUserDocument, APIUserSchema } from './schemas';
 import { Connection, Model, connect } from 'mongoose';
 import { CreateAPIUserDTO, UpdateAPIUserDTO } from './dtos/api-user.dto';
-import { LoggerModule, LoggerService } from '@app/logger';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { APIUserDocument } from './schemas/api-user.schema';
 import { APIUserService } from './api-user.service';
+import { LoggerModule } from '@app/logger';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import { faker } from '@faker-js/faker';
 import { getModelToken } from '@nestjs/mongoose';
 
 describe('APIUserService', () => {
   let service: APIUserService;
-  let apiUserModel: Model<APIUser>;
+  let model: Model<APIUser>;
   let mongod: MongoMemoryServer;
   let mongoConnection: Connection;
 
@@ -23,14 +22,14 @@ describe('APIUserService', () => {
     const uri = mongod.getUri();
     mongoConnection = (await connect(uri)).connection;
 
-    apiUserModel = mongoConnection.model(APIUser.name, APIUserSchema);
+    model = mongoConnection.model(APIUser.name, APIUserSchema);
     const module: TestingModule = await Test.createTestingModule({
       imports: [LoggerModule.registerForRoot({ logLevel: 'verbose' })],
       providers: [
         APIUserService,
         {
           provide: getModelToken(APIUser.name),
-          useValue: apiUserModel,
+          useValue: model,
         },
       ],
     }).compile();
@@ -42,6 +41,10 @@ describe('APIUserService', () => {
     await mongoConnection.dropDatabase();
     await mongoConnection.close();
     await mongod.stop();
+  });
+
+  it('should be defined', () => {
+    expect(service).toBeDefined();
   });
 
   describe('Create', () => {

@@ -8,7 +8,6 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { config } from './config';
 import { getMongoURI } from './app.utils';
-import { UrlShortenerModule } from './url-shortener/url-shortener.module';
 
 @Module({
   imports: [
@@ -30,7 +29,6 @@ import { UrlShortenerModule } from './url-shortener/url-shortener.module';
       load: [config],
     }),
     ComposerModule,
-    UrlShortenerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -8,7 +8,7 @@ import {
   Pagination,
   PartialTextSearchQuery,
   FilterByRoleQuery,
-} from './interfaces';
+} from '../core/interfaces';
 import { APIUserDocument } from './schemas/api-user.schema';
 import { LoggerService } from '@app/logger';
 @Injectable()

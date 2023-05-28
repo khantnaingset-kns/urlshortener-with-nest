@@ -27,13 +27,14 @@ import {
   ApiQuery,
   ApiForbiddenResponse,
   ApiInternalServerErrorResponse,
+  ApiBearerAuth,
 } from '@nestjs/swagger';
 import {
   FilterByRoleQuery,
   Pagination,
   PartialTextSearchQuery,
-} from './interfaces';
-import { JwtAuthGuard, RoleGuard } from 'src/guards';
+} from '../core/interfaces';
+import { JwtAuthGuard, RoleGuard } from '../../guards';
 import { Role } from '../../decorators';
 import { Roles } from './enums';
 
@@ -72,8 +73,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(RoleGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Role(Roles.Admin)
   @HttpCode(200)
   @Get()
@@ -93,8 +94,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(RoleGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Role(Roles.Admin)
   @HttpCode(200)
   @Get('search')
@@ -116,8 +117,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(RoleGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Role(Roles.Admin)
   @HttpCode(200)
   @Get('filter-by-role')
@@ -136,8 +137,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
-  @UseGuards(JwtAuthGuard)
-  @UseGuards(RoleGuard)
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Role(Roles.Admin)
   @HttpCode(200)
   @Get(':id')
@@ -155,6 +156,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Put(':id')
   async update(
@@ -173,6 +176,8 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(200)
   @Delete(':id')
   async deleteById(@Param('id') apiUserID: string): Promise<any> {

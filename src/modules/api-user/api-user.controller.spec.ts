@@ -3,7 +3,7 @@ import {
   FilterByRoleQuery,
   Pagination,
   PartialTextSearchQuery,
-} from './interfaces';
+} from '../core/interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { APIUserController } from './api-user.controller';
@@ -91,6 +91,7 @@ describe('APIUserController', () => {
               ),
             deleteById: jest
               .fn()
+              // eslint-disable-next-line @typescript-eslint/no-unused-vars
               .mockImplementation((apiUserId: string) =>
                 Promise.resolve(apiUsers[1]),
               ),
@@ -105,6 +106,10 @@ describe('APIUserController', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+  });
+
+  it('controller be defined', () => {
+    expect(controller).toBeDefined();
   });
 
   describe('create', () => {
@@ -138,7 +143,7 @@ describe('APIUserController', () => {
       const result = await controller.findAll(pagination);
 
       expect(service.findAll).toHaveBeenCalledWith(pagination);
-      expect(result).toBe(apiUsers);
+      expect(result).toEqual(apiUsers);
     });
   });
 
@@ -156,7 +161,7 @@ describe('APIUserController', () => {
       const result = await controller.findByText(searchQuery);
 
       expect(service.findByText).toHaveBeenCalledWith(searchQuery);
-      expect(result).toBe(apiUsers);
+      expect(result).toEqual(apiUsers);
     });
   });
 
@@ -174,7 +179,7 @@ describe('APIUserController', () => {
       const result = await controller.filterByRole(filterByRoleQuery);
 
       expect(service.filterByRole).toHaveBeenCalledWith(filterByRoleQuery);
-      expect(result).toBe([apiUsers[0], apiUsers[1]]);
+      expect(result).toEqual([apiUsers[0], apiUsers[1]]);
     });
   });
 
@@ -185,7 +190,7 @@ describe('APIUserController', () => {
       const result = await controller.findById(apiUserID);
 
       expect(service.findById).toHaveBeenCalledWith(apiUserID);
-      expect(result).toBe(apiUsers[0]);
+      expect(result).toEqual([apiUsers[0]]);
     });
   });
 
@@ -214,7 +219,9 @@ describe('APIUserController', () => {
       const result = await controller.deleteById(apiUserID);
 
       expect(service.deleteById).toHaveBeenCalledWith(apiUserID);
-      expect(result).toBe(apiUsers[1]);
+      expect(result).toEqual({
+        message: 'API User with ID 123 deleted successfully',
+      });
     });
   });
 });
