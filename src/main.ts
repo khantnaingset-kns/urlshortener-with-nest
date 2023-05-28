@@ -26,6 +26,8 @@ async function bootstrap() {
   if (process.env.NODE_ENV === 'prod') {
     app.useLogger(app.get(LoggerService));
   }
+  // enabling CORS
+  app.enableCors();
   const configService = app.get(ConfigService);
   // enable URI versioning
   app.enableVersioning({

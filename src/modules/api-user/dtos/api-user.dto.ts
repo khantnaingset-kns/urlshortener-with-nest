@@ -2,7 +2,7 @@ import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 
 import { ApiProperty } from '@nestjs/swagger';
 import { PartialType } from '@nestjs/swagger';
-import { Role } from '../enums';
+import { Roles } from '../enums';
 
 export class CreateAPIUserDTO {
   @ApiProperty()
@@ -22,7 +22,7 @@ export class CreateAPIUserDTO {
 
   @ApiProperty()
   @IsNotEmpty()
-  @IsEnum(Role)
+  @IsEnum(Roles)
   role: string;
 }
 

@@ -3,7 +3,7 @@ import * as argon2 from 'argon2';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 import { HydratedDocument } from 'mongoose';
-import { Role } from '../enums';
+import { Roles } from '../enums';
 
 export type APIUserDocument = HydratedDocument<APIUser>;
 
@@ -21,8 +21,8 @@ export class APIUser {
   })
   password: string;
 
-  @Prop({ type: String, enum: Role, default: Role.User })
-  role: Role;
+  @Prop({ type: String, enum: Roles, default: Roles.User })
+  role: Roles;
 }
 
 export const APIUserSchema = SchemaFactory.createForClass(APIUser);

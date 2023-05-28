@@ -7,6 +7,8 @@ import {
   Put,
   Param,
   Delete,
+  UseGuards,
+  HttpCode,
 } from '@nestjs/common';
 import { APIUserService } from './api-user.service';
 import {
@@ -31,9 +33,12 @@ import {
   Pagination,
   PartialTextSearchQuery,
 } from './interfaces';
+import { JwtAuthGuard, RoleGuard } from 'src/guards';
+import { Role } from '../../decorators';
+import { Roles } from './enums';
 
 @ApiTags('API Users')
-@Controller('api-users')
+@Controller({ path: 'api-users', version: '1' })
 export class APIUserController {
   constructor(private readonly apiUserService: APIUserService) {}
 
@@ -48,7 +53,8 @@ export class APIUserController {
   @ApiInternalServerErrorResponse({
     description: 'Server error Occured at registration',
   })
-  @Post()
+  @HttpCode(201)
+  @Post('register')
   async create(
     @Body() createAPIUserDTO: CreateAPIUserDTO,
   ): Promise<APIUserDocument> {
@@ -66,6 +72,10 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
+  @Role(Roles.Admin)
+  @HttpCode(200)
   @Get()
   async findAll(@Query() pagination: Pagination): Promise<APIUserDocument[]> {
     return this.apiUserService.findAll(pagination);
@@ -83,6 +93,10 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
+  @Role(Roles.Admin)
+  @HttpCode(200)
   @Get('search')
   async findByText(
     @Query() searchQuery: PartialTextSearchQuery,
@@ -102,6 +116,10 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
+  @Role(Roles.Admin)
+  @HttpCode(200)
   @Get('filter-by-role')
   async filterByRole(
     @Query() filterQuery: FilterByRoleQuery,
@@ -118,6 +136,10 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @UseGuards(JwtAuthGuard)
+  @UseGuards(RoleGuard)
+  @Role(Roles.Admin)
+  @HttpCode(200)
   @Get(':id')
   async findById(@Param('id') apiUserID: string): Promise<APIUserDocument> {
     return this.apiUserService.findById(apiUserID);
@@ -133,6 +155,7 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @HttpCode(200)
   @Put(':id')
   async update(
     @Param('id') apiUserID: string,
@@ -150,6 +173,7 @@ export class APIUserController {
   })
   @ApiForbiddenResponse({ description: 'Forbidden' })
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
+  @HttpCode(200)
   @Delete(':id')
   async deleteById(@Param('id') apiUserID: string): Promise<any> {
     await this.apiUserService.deleteById(apiUserID);
