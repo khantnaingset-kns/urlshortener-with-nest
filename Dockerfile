@@ -2,8 +2,9 @@
 FROM node:latest AS build-env
 WORKDIR /usr/src/app
 COPY . /usr/src/app/
-RUN npm ci --omit=dev
-RUN npm run build
+RUN npm install -g pnpm
+RUN pnpm install -P
+RUN pnpm build
 
 # 1. Build the app using minimal alpine env
 FROM node:lts-alpine
