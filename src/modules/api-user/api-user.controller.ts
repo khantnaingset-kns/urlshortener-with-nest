@@ -33,13 +33,13 @@ import {
   FilterByRoleQuery,
   Pagination,
   PartialTextSearchQuery,
-} from '../core/interfaces';
+} from '../../core/interfaces';
 import { JwtAuthGuard, RoleGuard } from '../../guards';
 import { Role } from '../../decorators';
 import { Roles } from './enums';
 
 @ApiTags('API Users')
-@Controller({ path: 'api-users', version: '1' })
+@Controller({ path: 'api/api-users', version: '1' })
 export class APIUserController {
   constructor(private readonly apiUserService: APIUserService) {}
 

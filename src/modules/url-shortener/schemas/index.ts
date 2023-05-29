@@ -1,1 +1,5 @@
-export { ShortenURLSchema, ShortenURL } from './shortenurl.schema';
+export {
+  ShortenURLSchema,
+  ShortenURL,
+  ShortenURLDocument,
+} from './shortenurl.schema';

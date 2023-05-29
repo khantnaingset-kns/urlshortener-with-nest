@@ -80,11 +80,11 @@ describe('BlackListURLService', () => {
     });
 
     it('should match the number of urls', async () => {
-      const url_Q1 = await service.findAll({ skip: 0, take: 5 });
+      const url_Q1 = await service.findAllWithPagination({ skip: 0, take: 5 });
       expect(url_Q1.length).toEqual(5);
-      const url_Q2 = await service.findAll({ skip: 0, take: 5 });
+      const url_Q2 = await service.findAllWithPagination({ skip: 0, take: 5 });
       expect(url_Q2.length).toEqual(5);
-      const url_Q3 = await service.findAll({ skip: 0, take: 10 });
+      const url_Q3 = await service.findAllWithPagination({ skip: 0, take: 10 });
       expect(url_Q3.length).toEqual(10);
     });
 
@@ -97,6 +97,16 @@ describe('BlackListURLService', () => {
         },
       });
       expect(result.length).toEqual(10);
+    });
+
+    it('should return exact one exact match url or undefined when url is not match', async () => {
+      const url = 'https://1337x.to';
+      await service.create(url);
+      const result = await service.findByURL(url);
+      expect(result).toBeDefined();
+
+      const unMatchResult = await service.findByURL('https://subplease.org');
+      expect(unMatchResult).toBeNull();
     });
   });
 

@@ -3,7 +3,7 @@ import {
   FilterByRoleQuery,
   Pagination,
   PartialTextSearchQuery,
-} from '../core/interfaces';
+} from '../../core/interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { APIUserController } from './api-user.controller';

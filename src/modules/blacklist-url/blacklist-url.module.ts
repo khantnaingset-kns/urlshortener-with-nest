@@ -25,5 +25,6 @@ import { MongooseModule } from '@nestjs/mongoose';
   ],
   providers: [BlackListURLService],
   controllers: [BlackListURLController],
+  exports: [BlackListURLService],
 })
 export class BlackListURLModule {}

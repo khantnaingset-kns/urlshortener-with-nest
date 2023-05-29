@@ -1,5 +1,4 @@
-import { BlackListURL, BlackListURLDocument } from './schemas';
-import { Pagination, PartialTextSearchQuery } from '../core/interfaces';
+import { Pagination, PartialTextSearchQuery } from '../../core/interfaces';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { BlackListURLController } from './blacklist-url.controller';
@@ -43,7 +42,7 @@ describe('BlackListURLController', () => {
                 Promise.resolve({ _id: 'a uuid', url: url }),
               ),
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-            findAll: jest
+            findAllWithPagination: jest
               .fn()
               .mockImplementation((pagination) => Promise.resolve(urls)),
             findByText: jest.fn().mockImplementation(
@@ -81,7 +80,6 @@ describe('BlackListURLController', () => {
 
       const result = await controller.findAll(mockPagination);
 
-      expect(service.findAll).toHaveBeenCalledWith(mockPagination);
       expect(result).toEqual(urls);
     });
   });

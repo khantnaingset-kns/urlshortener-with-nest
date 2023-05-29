@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { BlackListURL, BlackListURLDocument } from './schemas';
-import { Pagination, PartialTextSearchQuery } from '../core/interfaces';
+import { Pagination, PartialTextSearchQuery } from '../../core/interfaces';
 
 @Injectable()
 export class BlackListURLService {
@@ -16,8 +16,15 @@ export class BlackListURLService {
     return createdBlackListURL.save();
   }
 
-  async findAll({ skip, take }: Pagination): Promise<BlackListURLDocument[]> {
+  async findAllWithPagination({
+    skip,
+    take,
+  }: Pagination): Promise<BlackListURLDocument[]> {
     return this._blackListURLModel.find().skip(skip).limit(take).exec();
+  }
+
+  async findAll(): Promise<BlackListURLDocument[]> {
+    return this._blackListURLModel.find().exec();
   }
 
   async findByURL(url): Promise<BlackListURLDocument> {
@@ -30,7 +37,7 @@ export class BlackListURLService {
   }: PartialTextSearchQuery): Promise<BlackListURLDocument[]> {
     return this._blackListURLModel
       .find({
-        url: { $regex: text },
+        url: { $regex: text, $options: 'i' },
       })
       .skip(pagination.skip)
       .limit(pagination.take)

@@ -38,14 +38,16 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "jsonwebtoken": "^9.0.0",
+    "luxon": "^3.3.0",
     "moment": "^2.29.4",
     "mongoose": "^7.2.0",
     "mongoose-async": "^1.0.1",
-    "nanoid": "^4.0.2",
+    "nanoid": "^3.3.4",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0",
+    "valid-url": "^1.0.9",
     "winston": "^3.8.2"
   },
   "devDependencies": {
@@ -55,9 +57,12 @@
     "@nestjs/testing": "^9.0.0",
     "@types/express": "^4.17.13",
     "@types/jest": "29.5.0",
+    "@types/luxon": "^3.3.0",
+    "@types/nanoid": "^3.0.0",
     "@types/node": "18.15.11",
     "@types/passport-jwt": "^3.0.8",
     "@types/supertest": "^2.0.11",
+    "@types/valid-url": "^1.0.4",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "eslint": "^8.0.1",
@@ -81,6 +86,9 @@
       "json",
       "ts"
     ],
+    "transformIgnorePatterns": [
+      "/node_modules/(?!(nanoid)/)"
+    ],
     "rootDir": ".",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
@@ -96,7 +104,8 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^@app/logger(|/.*)$": "<rootDir>/libs/logger/src/$1"
+      "^@app/logger(|/.*)$": "<rootDir>/libs/logger/src/$1",
+      "^nanoid(/(.*)|$)": "nanoid$1"
     }
   }
 }

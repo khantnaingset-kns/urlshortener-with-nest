@@ -3,16 +3,12 @@ export const config = () => ({
   app: {
     logLevel: process.env.LOG_LEVEL || 'debug',
     port: parseInt(process.env.PORT, 10),
+    baseURL: process.env.BASE_URL,
     secret: process.env.SECRET,
+    urlExpirationDaysV1: parseInt(process.env.URL_EXPIRATION_V1, 10) || 9,
+    urlExpirationDaysV2: parseInt(process.env.URL_EXPIRATION_V2, 10) || 20,
   },
   db: {
-    host: process.env.MONGO_HOST,
-    port: parseInt(process.env.MONGO_PORT, 10),
-    username: process.env.MONGO_USERNAME,
-    password: process.env.MONGO_PASSWORD,
-    database: process.env.MONGO_DATABASE,
     uri: process.env.MONGO_URI,
-    is_atlas: process.env.MONGO_IS_ATLAS,
-    atlas_prefix: process.env.MONGO_ATLAS_PREFIX,
   },
 });

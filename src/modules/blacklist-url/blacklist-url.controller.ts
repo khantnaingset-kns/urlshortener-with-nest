@@ -31,11 +31,11 @@ import { Role } from '../../decorators';
 
 import { JwtAuthGuard, RoleGuard } from '../../guards';
 import { Roles } from '../api-user/enums';
-import { Pagination, PartialTextSearchQuery } from '../core/interfaces';
+import { Pagination, PartialTextSearchQuery } from '../../core/interfaces';
 
 @ApiTags('blacklist-url')
 @Controller({
-  path: 'blacklist-url',
+  path: 'api/blacklist-url',
   version: '1',
 })
 export class BlackListURLController {
@@ -80,7 +80,7 @@ export class BlackListURLController {
   async findAll(
     @Query() pagination: Pagination,
   ): Promise<BlackListURLDocument[]> {
-    return this._blackListURLService.findAll(pagination);
+    return this._blackListURLService.findAllWithPagination(pagination);
   }
 
   @ApiOperation({ summary: 'Get all BlackListed URL' })

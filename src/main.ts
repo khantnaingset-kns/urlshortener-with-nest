@@ -39,12 +39,13 @@ async function bootstrap() {
   // register the fastiy helmet
   await app.register(helmet, { global: true });
   // setup global prefix
-  app.setGlobalPrefix('api', {
-    exclude: [
-      { path: 'health', method: RequestMethod.GET },
-      { path: '/', method: RequestMethod.GET },
-    ],
-  });
+  // app.setGlobalPrefix('api', {
+  //   exclude: [
+  //     { path: 'health', method: RequestMethod.GET },
+  //     { path: '', method: RequestMethod.GET },
+  //   ],
+  // });
+
   // setup OpenAPI - Swagger docs
   const config = new DocumentBuilder()
     .setTitle('Url Shortener with Nest')
