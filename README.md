@@ -1,51 +1,23 @@
+# URL Shortener with Nest
 
+# Description
 
-## Description
+> Simple and yet powerful URL Shortener written with Nest.js and Typescript
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Project Description
 
-## Installation
-
-```bash
-$ pnpm install
-```
-
-## Running the app
-
-```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
-```
-
-## Test
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+- Language: Typescript
+- Framework: Nest.js
+- Database: MongoDB
+- Cache: In-Memory (Currently, Redis v4 has problem with Nest.js cache manager)
+- Security:
+  - Authentication: JSON Web Token
+  - Authorization: RABC
+- Bootstrap: Docker
+- CI/CD: GitHub actions
+- Docs URL: `/api/docs` for swagger.
+- Comment style: All the code in project are self-documenting
+- Deploy to AWS Lambda: GitOps - Every push or pull request to release/lambda will deploy the docker image to lambda. (Currently I don’t have enough time to write actions for this tasks)
+- Code Quality Analysis: SonarCloud
+  - SonarCloud Project URL: [https://sonarcloud.io/summary/new_code?id=url-shortener-with-nest-sonar&branch=main](https://sonarcloud.io/summary/new_code?id=url-shortener-with-nest-sonar&branch=main)
+- Package Analysis: Synk
