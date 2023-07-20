@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_urlshortener_with_nest_1689833689202-pr-trigger-input-set
+  identifier: Build_urlshortener_with_nest_1689833689202prtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: default_project
+  pipeline:
+    identifier: Build_urlshortener_with_nest_1689833689202
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
