@@ -1,18 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
+import { IBlacklistURL, IBlacklistURLList } from 'libs/core';
 
-export class CreateBlackListURLDTO {
+export class BlacklistURLDto implements IBlacklistURL {
   @ApiProperty()
+  @IsString()
   @IsNotEmpty()
-  readonly url: string;
+  url: string;
 }
 
-export class BlackListURLResponse {
+export class BlacklistURLResponse implements IBlacklistURL {
   @ApiProperty()
   readonly url: string;
 }
 
-export class BlackListURLDeleteResponse {
+export class BlacklistURLDeleteResponse {
   @ApiProperty()
   readonly message: string;
+}
+
+export class BlacklistURLListDto implements IBlacklistURLList {
+  @ApiProperty({ type: BlacklistURLDto })
+  urls: IBlacklistURL[];
 }

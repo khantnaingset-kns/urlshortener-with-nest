@@ -28,7 +28,6 @@ import {
 import { JwtAuthGuard, RoleGuard } from '../../guards';
 import { URLShortenerService } from './url-shortener.service';
 import { Role } from '../../decorators';
-import { Roles } from '../api-user/enums';
 import { Pagination, PartialTextSearchQuery } from '../../core/interfaces';
 import { ShortenURLDocument } from './schemas';
 import {
@@ -36,9 +35,10 @@ import {
   ShortenURLRequest,
   ShortenURLSingleResponse,
 } from './dtos/url-shortener.dto';
+import { EUserRole } from 'libs/core';
 
-@ApiTags('urlshortener')
-@Controller('api/urlshortener')
+@ApiTags('URL Shortener')
+@Controller('urlshortener')
 export class URLShortenerController {
   constructor(private readonly _urlShortenerService: URLShortenerService) {}
 
@@ -141,7 +141,7 @@ export class URLShortenerController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get()
   async findAll(
@@ -163,7 +163,7 @@ export class URLShortenerController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get('search')
   async findByText(

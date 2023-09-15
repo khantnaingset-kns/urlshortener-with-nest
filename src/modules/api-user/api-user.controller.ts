@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { APIUserService } from './api-user.service';
 import {
-  CreateAPIUserDTO,
+  CreateAPIUserDto,
   APIUserResponse,
   UpdateAPIUserDTO,
   DeleteRouteSuccessResponse,
@@ -36,15 +36,15 @@ import {
 } from '../../core/interfaces';
 import { JwtAuthGuard, RoleGuard } from '../../guards';
 import { Role } from '../../decorators';
-import { Roles } from './enums';
+import { EUserRole } from 'libs/core';
 
 @ApiTags('API Users')
-@Controller({ path: 'api/api-users', version: '1' })
+@Controller({ path: 'api-users', version: '1' })
 export class APIUserController {
   constructor(private readonly apiUserService: APIUserService) {}
 
   @ApiOperation({ summary: 'Create a new API user' })
-  @ApiBody({ type: CreateAPIUserDTO })
+  @ApiBody({ type: CreateAPIUserDto })
   @ApiResponse({
     status: 201,
     description: 'The created API user',
@@ -57,7 +57,7 @@ export class APIUserController {
   @HttpCode(201)
   @Post('register')
   async create(
-    @Body() createAPIUserDTO: CreateAPIUserDTO,
+    @Body() createAPIUserDTO: CreateAPIUserDto,
   ): Promise<APIUserDocument> {
     return this.apiUserService.create(createAPIUserDTO);
   }
@@ -75,7 +75,7 @@ export class APIUserController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get()
   async findAll(@Query() pagination: Pagination): Promise<APIUserDocument[]> {
@@ -96,7 +96,7 @@ export class APIUserController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get('search')
   async findByText(
@@ -119,7 +119,7 @@ export class APIUserController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get('filter-by-role')
   async filterByRole(
@@ -139,7 +139,7 @@ export class APIUserController {
   @ApiInternalServerErrorResponse({ description: 'Error Occured at Server' })
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard, RoleGuard)
-  @Role(Roles.Admin)
+  @Role(EUserRole.ADMIN)
   @HttpCode(200)
   @Get(':id')
   async findById(@Param('id') apiUserID: string): Promise<APIUserDocument> {

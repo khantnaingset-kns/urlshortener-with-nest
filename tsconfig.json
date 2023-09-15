@@ -23,6 +23,18 @@
       ],
       "@app/logger/*": [
         "libs/logger/src/*"
+      ],
+      "libs/common": [
+        "libs/common/src"
+      ],
+      "libs/common/*": [
+        "libs/common/src/*"
+      ],
+      "libs/core": [
+        "libs/core/src"
+      ],
+      "libs/core/*": [
+        "libs/core/src/*"
       ]
     }
   }

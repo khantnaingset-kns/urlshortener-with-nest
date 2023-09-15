@@ -1,5 +1,1 @@
-export {
-  BlackListURLResponse,
-  CreateBlackListURLDTO,
-  BlackListURLDeleteResponse,
-} from './blacklist-url.dto';
+export * from './blacklist-url.dto';

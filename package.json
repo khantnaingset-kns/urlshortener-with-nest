@@ -105,7 +105,9 @@
     ],
     "moduleNameMapper": {
       "^@app/logger(|/.*)$": "<rootDir>/libs/logger/src/$1",
-      "^nanoid(/(.*)|$)": "nanoid$1"
+      "^nanoid(/(.*)|$)": "nanoid$1",
+      "^libs/common(|/.*)$": "<rootDir>/libs/common/src/$1",
+      "^libs/core(|/.*)$": "<rootDir>/libs/core/src/$1"
     }
   }
 }

@@ -6,8 +6,6 @@ import {
   NestModule,
 } from '@nestjs/common';
 import { LoggerModuleAsyncOption, LoggerModuleOption } from './interfaces';
-
-import { ConfigurableModuleClass } from './logger.module-definition';
 import { LoggerMiddleware } from './logger.middleware';
 import { LoggerService } from './logger.service';
 

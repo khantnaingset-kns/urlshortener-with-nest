@@ -22,29 +22,35 @@ async function bootstrap() {
       logger: process.env.NODE_ENV === 'prod' ? false : undefined,
     },
   );
+
   // inject custom logger based on NODE_ENV
   if (process.env.NODE_ENV === 'prod') {
     app.useLogger(app.get(LoggerService));
   }
+
   // enabling CORS
   app.enableCors();
   const configService = app.get(ConfigService);
+
   // enable URI versioning
   app.enableVersioning({
     type: VersioningType.URI,
     defaultVersion: '1',
   });
+
   // enable the validation pipe globally
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
   // register the fastiy helmet
   await app.register(helmet, { global: true });
+
   // setup global prefix
-  // app.setGlobalPrefix('api', {
-  //   exclude: [
-  //     { path: 'health', method: RequestMethod.GET },
-  //     { path: '', method: RequestMethod.GET },
-  //   ],
-  // });
+  app.setGlobalPrefix('api', {
+    exclude: [
+      { path: 'health', method: RequestMethod.GET },
+      { path: '', method: RequestMethod.GET },
+    ],
+  });
 
   // setup OpenAPI - Swagger docs
   const config = new DocumentBuilder()

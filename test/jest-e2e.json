@@ -12,6 +12,10 @@
   },
   "moduleNameMapper": {
     "@app/logger/(.*)": "<rootDir>/../libs/logger/src/$1",
-    "@app/logger": "<rootDir>/../libs/logger/src"
+    "@app/logger": "<rootDir>/../libs/logger/src",
+    "libs/common/(.*)": "<rootDir>/../libs/common/src/$1",
+    "libs/common": "<rootDir>/../libs/common/src",
+    "libs/core/(.*)": "<rootDir>/../libs/core/src/$1",
+    "libs/core": "<rootDir>/../libs/core/src"
   }
 }
