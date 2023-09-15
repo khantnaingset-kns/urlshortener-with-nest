@@ -4,15 +4,13 @@ Welcome to the OpenSource URL Shortener project, designed exclusively for learni
 
 ### Key Features: ###
 
-Nest.js Foundation: Delve into the powerful Nest.js framework and learn how to create modular and scalable applications. Explore its architectural intricacies and grasp the principles of maintainable code.
+- Nest.js Foundation: Delve into the powerful Nest.js framework and learn how to create modular and scalable applications. Explore its architectural intricacies and grasp the principles of maintainable code and DDD design.
 
-TypeScript Proficiency: Gain hands-on experience with TypeScript, a language that combines innovation with safety. Discover how type checking at compile time can enhance code reliability.
+- TypeScript Proficiency: Gain hands-on experience with TypeScript, a language that combines innovation with safety. Discover how type checking at compile time can enhance code reliability.
 
-Node.js Performance: Dive into Node.js and harness its capabilities for high-performance web applications. Understand how Node.js handles concurrency and real-time features.
+- Node.js Performance: Dive into Node.js and harness its capabilities for high-performance web applications.
 
-User Interface Design: Explore the principles of user-centric design with an intuitive and minimalist user interface. Learn how to create user-friendly experiences.
-
-Open-Source Collaboration: Immerse yourself in the world of open-source development. Contribute, collaborate, and discover the power of community-driven projects.
+- Open-Source Collaboration: Immerse yourself in the world of open-source development. Contribute, collaborate, and discover the power of community-driven projects.
 
 # Description
 
