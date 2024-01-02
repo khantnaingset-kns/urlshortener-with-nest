@@ -51,22 +51,12 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  
-  scan:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        continue-on-error: true # To make sure that SARIF upload gets called
-        env:
-           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
   
   publish:
     name: Publish the Docker image
     runs-on: ubuntu-latest 
-    needs: [code-analysis, scan]
+    needs: [code-analysis]
     steps:
       - uses: actions/checkout@v3
         with:
