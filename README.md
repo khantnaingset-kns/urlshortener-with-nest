@@ -1,16 +1,6 @@
 # URL Shortener with Nest
 
-Welcome to the OpenSource URL Shortener project, designed exclusively for learning purposes and as a tutorial resource. Built with Nest.js, TypeScript, and Node.js, this project serves as an invaluable educational tool for aspiring developers and enthusiasts.
-
-### Key Features: ###
-
-- Nest.js Foundation: Delve into the powerful Nest.js framework and learn how to create modular and scalable applications. Explore its architectural intricacies and grasp the principles of maintainable code and DDD design.
-
-- TypeScript Proficiency: Gain hands-on experience with TypeScript, a language that combines innovation with safety. Discover how type checking at compile time can enhance code reliability.
-
-- Node.js Performance: Dive into Node.js and harness its capabilities for high-performance web applications.
-
-- Open-Source Collaboration: Immerse yourself in the world of open-source development. Contribute, collaborate, and discover the power of community-driven projects.
+Welcome to the OpenSource URL Shortener project, designed exclusively for learning purposes. Built with Nest.js, TypeScript, and Node.js, this project serves as an invaluable educational tool for aspiring developers, devops and enthusiasts.
 
 # Description
 
